@@ -1,1 +1,14 @@
 Get http://localhost:5004/
+
+###
+
+POST  http://localhost:5004/
+Content-Type: application/json
+
+{
+    "Name": "test4",
+    "Email": "test4@gmail.com",
+    "Mobile": "8592975938",
+    "DOB": "1998-5-5",
+    "JobType": "PartTime"
+}
