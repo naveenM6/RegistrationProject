@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import Data from '../Data'
+/* import Data from '../Data' */
 
 import './index.css'
 
@@ -24,6 +24,21 @@ export default class Home extends Component {
 
     selectJobType = event =>{
         this.setState({selectedJobType : event.target.innerText});
+    }
+
+    componentDidMount(){
+        this.getData()
+    }
+
+    getData = async () =>{
+        const apiUrl = "http://localhost:5004/"
+        const options = {
+            method: 'GET',
+        }
+        const response = await fetch(apiUrl,options);
+        if(response.status === 'OK'){
+            console.log('hi');
+        }
     }
 
     render(){
@@ -92,7 +107,6 @@ export default class Home extends Component {
                     </div>
                 </form>
             </fieldset>
-            <Data/>
         </div>)
     }
 }
