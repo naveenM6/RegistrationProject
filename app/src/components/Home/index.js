@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import Data from '../Data'
+
 import './index.css'
 
 const profile = require("./images/profilepic.png").default
@@ -90,6 +92,7 @@ export default class Home extends Component {
                     </div>
                 </form>
             </fieldset>
+            <Data/>
         </div>)
     }
 }
