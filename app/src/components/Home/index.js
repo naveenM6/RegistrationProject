@@ -6,7 +6,7 @@ const profile = require("./images/profilepic.png").default
 
 export default class Home extends Component {
 
-    state = {image: profile,isActive:false}
+    state = {image: profile,isActive:false,selectedJobType:''}
 
     onChangePhoto = event =>{
         const selectedImage = event.target.files[0];
@@ -16,13 +16,23 @@ export default class Home extends Component {
         }
     }
 
+    preventDefault = event =>{
+        event.preventDefault();
+    }
+
+    selectJobType = event =>{
+        this.setState({selectedJobType : event.target.innerText});
+        
+
+    }
+
     render(){
         const {image} = this.state
 
         return (<div className="main-container">
             <fieldset>
                 <legend>Registration</legend>
-                <form className="form-container" onClick={this.preventDefault}>
+                <form className="form-container" onSubmit={this.preventDefault}>
                     <div className="name-photo">
                         <div className="name-container">
                             <label htmlFor="name">Name</label>
@@ -56,15 +66,26 @@ export default class Home extends Component {
                         <div className="jobtype">
                             <p className="jobtype-para">Job Type</p>
                             <div className="types">
-                                <p className="job-para">FT</p>
-                                <p className="job-para">GT</p>
-                                <p className="job-para">Consultant</p>
+                                <p className="job-para ft" onClick={this.selectJobType}>FT</p>
+                                <p className="job-para gt" onClick={this.selectJobType}>GT</p>
+                                <p className="job-para consultant" onClick={this.selectJobType}>Consultant</p>
                             </div>
                         </div>
                         <div className="dob">
                             <label className="date" htmlFor="date">DOB</label>
-                            <input type="date" id="date" className="dateinput"/>
+                            <input type="date" id="date" className="dateinput inputs"/>
                         </div>
+                    </div>
+                    <div className="location-submit">
+                        <div className="location-container">
+                            <label className="location" htmlFor="location">Pref.Location</label>
+                            <select id="location" className="select-item">
+                                <option>Hyderabad</option>
+                                <option>Banglore</option>
+                                <option>Chennai</option>
+                            </select>
+                        </div>
+                        <button className="btn" type="button">Add/Update</button>
                     </div>
                 </form>
             </fieldset>

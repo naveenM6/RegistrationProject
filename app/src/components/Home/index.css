@@ -50,6 +50,15 @@
 .job-para{
     border:1px solid #000000;
     padding: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.location-submit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
 }
 
 @media (max-width:767px){
@@ -83,7 +92,20 @@
     .dateinput{
         padding: 8px;
         margin-left: 10px;
-    }  
+    }
+    .location{
+        margin-left: -5px;
+        margin-right: 10px;
+    }
+    .select-item{
+        padding: 10px;
+        width: 165px;
+    }
+    .btn{
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
 }
 
 @media (min-width: 768px){
@@ -95,11 +117,12 @@
         align-items: center;
         justify-content:space-around;
     }
-    label{
+    label,.jobtype-para{
         font-size:20px;
         font-family: Roboto;
         font-weight: bold;
     }
+    
     .photo-container{
         order: 1;
         cursor: pointer;
@@ -120,5 +143,41 @@
     }
     .name{
         width: 166px;
+    }
+    .jobtype-dob{
+        flex-direction:row;
+        justify-content: space-around;
+        margin-top: 25px;
+    }
+    .jobtype{
+        display: flex;
+        justify-content: space-around;
+    }
+    .jobtype-para{
+        padding: 10px;
+    }
+    .job-para{
+        padding: 16px;
+    }
+    .location-container{
+        display: flex;
+        align-items: center;
+    }
+    .location{
+        margin-left: -80px;
+        margin-right: 20px;
+    }
+    .location-submit{
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+    .select-item{
+        padding: 15px;
+    }
+    .btn{
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 6px;
     }
 }
