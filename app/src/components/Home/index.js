@@ -22,12 +22,10 @@ export default class Home extends Component {
 
     selectJobType = event =>{
         this.setState({selectedJobType : event.target.innerText});
-        
-
     }
 
     render(){
-        const {image} = this.state
+        const {image,selectedJobType} = this.state
 
         return (<div className="main-container">
             <fieldset>
@@ -54,7 +52,7 @@ export default class Home extends Component {
                     <div className="mobile-email">
                         <div className="mobile">
                             <label htmlFor="number">Mobile</label>
-                            <input type="text" id="country" className="country inputs" placeholder="+91"/>
+                            <input type="text" id="country" className="country inputs" defaultValue="+91"/>
                             <input type="text" id="number" className="number"/>
                         </div>
                         <div className="email">
@@ -66,9 +64,12 @@ export default class Home extends Component {
                         <div className="jobtype">
                             <p className="jobtype-para">Job Type</p>
                             <div className="types">
-                                <p className="job-para ft" onClick={this.selectJobType}>FT</p>
-                                <p className="job-para gt" onClick={this.selectJobType}>GT</p>
-                                <p className="job-para consultant" onClick={this.selectJobType}>Consultant</p>
+                                <p className={selectedJobType === "FT"?"job-para ft blue":"job-para ft"} 
+                                onClick={this.selectJobType}>FT</p>
+                                <p className={selectedJobType === "PT"?"job-para GT blue":"job-para gt"} 
+                                onClick={this.selectJobType}>PT</p>
+                                <p className={selectedJobType === "Consultant"?"job-para consultant blue":"job-para consultant"} 
+                                onClick={this.selectJobType}>Consultant</p>
                             </div>
                         </div>
                         <div className="dob">

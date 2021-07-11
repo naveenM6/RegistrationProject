@@ -61,6 +61,10 @@
     margin-top: 15px;
 }
 
+.blue{
+    background-color:#d3deef;
+}
+
 @media (max-width:767px){
     .name-photo{
         align-items: center;
