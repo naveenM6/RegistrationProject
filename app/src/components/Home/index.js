@@ -1,0 +1,73 @@
+import {Component} from 'react'
+
+import './index.css'
+
+const profile = require("./images/profilepic.png").default
+
+export default class Home extends Component {
+
+    state = {image: profile,isActive:false}
+
+    onChangePhoto = event =>{
+        const selectedImage = event.target.files[0];
+        if (selectedImage !== undefined){
+            const src = URL.createObjectURL(selectedImage);
+            this.setState({image:src,isActive:true});
+        }
+    }
+
+    render(){
+        const {image} = this.state
+
+        return (<div className="main-container">
+            <fieldset>
+                <legend>Registration</legend>
+                <form className="form-container" onClick={this.preventDefault}>
+                    <div className="name-photo">
+                        <div className="name-container">
+                            <label htmlFor="name">Name</label>
+                            <input type="text" id="name" className="form-control inputs name"/>
+                        </div>
+                        <div className="photo-container">
+                            <label htmlFor="photo" className="photolabel">
+                                <p className="profilepic-para">Profile Pic</p>
+                                <img src={image} alt="person" className="profilepic"/>
+                            </label>
+                            {/* {isActive?(<img src={image} alt="profile pic"/>):
+                                (<label htmlFor="photo">
+                                    <img src={require("./images/profilepic.png").default} alt="person" className="profilepic"/>
+                                </label>)
+                            } */}
+                            <input type="file" id="photo" accept="image/*" className="photo-input inputs" onChange={this.onChangePhoto}/>
+                        </div>
+                    </div>
+                    <div className="mobile-email">
+                        <div className="mobile">
+                            <label htmlFor="number">Mobile</label>
+                            <input type="text" id="country" className="country inputs" placeholder="+91"/>
+                            <input type="text" id="number" className="number"/>
+                        </div>
+                        <div className="email">
+                            <label htmlFor="email">Email</label>
+                            <input type="text" id="email" className="emailinput inputs"/>
+                        </div>
+                    </div>
+                    <div className="jobtype-dob">
+                        <div className="jobtype">
+                            <p className="jobtype-para">Job Type</p>
+                            <div className="types">
+                                <p className="job-para">FT</p>
+                                <p className="job-para">GT</p>
+                                <p className="job-para">Consultant</p>
+                            </div>
+                        </div>
+                        <div className="dob">
+                            <label className="date" htmlFor="date">DOB</label>
+                            <input type="date" id="date" className="dateinput"/>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>)
+    }
+}

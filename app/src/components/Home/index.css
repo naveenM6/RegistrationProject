@@ -1,0 +1,124 @@
+.main-container{
+    padding:10px;
+}
+
+/* Name Photo */
+
+.name-photo{
+    display:flex;
+    flex-direction:column;
+}
+
+.photo-container{
+    order:-1;
+}
+.profilepic{
+    height:155px;
+    width: 155px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.photo-input{
+    display: none;
+}
+
+/* Mobile  Email*/
+
+.mobile-email{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.country{
+    width: 25px;
+}
+
+/* jobtype Dob*/
+
+.jobtype-dob{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.types{
+    display: flex;
+}
+
+.job-para{
+    border:1px solid #000000;
+    padding: 6px;
+}
+
+@media (max-width:767px){
+    .name-photo{
+        align-items: center;
+    }
+    .inputs{
+        margin-left: 10px;
+    }
+    .profilepic-para{
+        display:none;
+    }
+    .number{
+        width: 136px;
+    }
+    .email{
+        margin-top: 15px;
+    }
+    .emailinput{
+        width: 165px;
+    }
+    .jobtype{
+        display: flex;
+    }
+    .types{
+        margin-left: 15px;
+    }
+    .jobtype-para{
+        margin-left: -45px;
+    }
+    .dateinput{
+        padding: 8px;
+        margin-left: 10px;
+    }  
+}
+
+@media (min-width: 768px){
+    .main-container{
+        padding:65px;
+    }
+    .name-photo,.mobile-email{
+        flex-direction: row;
+        align-items: center;
+        justify-content:space-around;
+    }
+    label{
+        font-size:20px;
+        font-family: Roboto;
+        font-weight: bold;
+    }
+    .photo-container{
+        order: 1;
+        cursor: pointer;
+    }
+    .photolabel{
+        display: flex;
+        align-items: center;
+    }
+    .profilepic{
+        margin-left: 35px;
+    }
+    .inputs{
+        margin-left: 35px;
+        padding: 10px;
+    }
+    .number{
+        padding: 10px;
+    }
+    .name{
+        width: 166px;
+    }
+}
