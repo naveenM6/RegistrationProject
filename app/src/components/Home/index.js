@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import Data from '../Data'
+import DataTableing from '../DataTableing';
 
 import './index.css'
 
@@ -8,7 +8,11 @@ const profile = require("./images/profilepic.png").default
 
 export default class Home extends Component {
 
-    state = {image: profile,isActive:false,selectedJobType:''}
+    state = {image: profile,isActive:false,selectedJobType:'',allData : [],
+            name:'',
+            mobile:'',
+            dob:'',
+            email:'',}
 
     onChangePhoto = event =>{
         const selectedImage = event.target.files[0];
@@ -33,16 +37,72 @@ export default class Home extends Component {
     getData = async () =>{
         const apiUrl = "http://localhost:5004/"
         const options = {
+            headers:{
+                "content-type": "application/json"
+            },
             method: 'GET',
         }
-        const response = await fetch(apiUrl,options);
-        if(response.status === 'OK'){
-            console.log('hi');
+        const responseData = await fetch(apiUrl,options);
+        if(responseData.ok === true){
+            const fetchedData = await responseData.json();
+            const updatedData = fetchedData.map( item => ({
+                name : item.Name,
+                email : item.Email,
+                mobile : item.Mobile,
+                dob : item.DOB,
+                jobType : item.JobType,
+            }));
+            this.setState({allData:updatedData});
         }
     }
 
+    onBlurEvent = event =>{
+        const enteredValue = event.target.value;
+        switch(event.target.id){
+            case event.target.id === 'name':
+                console.log(enteredValue);
+                this.setState({name:enteredValue});
+                break;
+            case event.target.id === 'email':
+                console.log(enteredValue);
+                this.setState({email:enteredValue});
+                break;
+            case event.target.id === 'date':
+                console.log(enteredValue);
+                this.setState({dob:enteredValue});
+                break;
+            case event.target.id === 'number':
+                console.log(enteredValue);
+                this.setState({mobile:enteredValue});
+                break;
+            default:
+                return null
+        }
+    }
+
+    onClickAdd = async () => {
+        const {name,email,mobile,dob,selectedJobType} = this.state
+        const userDetails = {name,email,mobile,dob,selectedJobType}
+        console.log(userDetails)
+        const apiUrl = "http://localhost:5004";
+        const options = {
+            headers:{
+                'content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(userDetails)
+        }
+        const response = await fetch(apiUrl, options);
+        if (response.ok === true) {
+            console.log('Data Inserted');
+        }
+    }
+
+
     render(){
-        const {image,selectedJobType} = this.state
+        const {image,selectedJobType,allData} = this.state;
+
+        let count = 0;
 
         return (<div className="main-container">
             <fieldset>
@@ -51,7 +111,9 @@ export default class Home extends Component {
                     <div className="name-photo">
                         <div className="name-container">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id="name" className="form-control inputs name"/>
+                            <input type="text" id="name" 
+                            className="form-control inputs name" 
+                            onBlur={this.onBlurEvent}/>
                         </div>
                         <div className="photo-container">
                             <label htmlFor="photo" className="photolabel">
@@ -70,11 +132,11 @@ export default class Home extends Component {
                         <div className="mobile">
                             <label htmlFor="number">Mobile</label>
                             <input type="text" id="country" className="country inputs" defaultValue="+91"/>
-                            <input type="text" id="number" className="number"/>
+                            <input type="text" id="number" className="number" onBlur={this.onBlurEvent}/>
                         </div>
                         <div className="email">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" className="emailinput inputs"/>
+                            <input type="text" id="email" className="emailinput inputs" onBlur={this.onBlurEvent}/>
                         </div>
                     </div>
                     <div className="jobtype-dob">
@@ -91,7 +153,7 @@ export default class Home extends Component {
                         </div>
                         <div className="dob">
                             <label className="date" htmlFor="date">DOB</label>
-                            <input type="date" id="date" className="dateinput inputs"/>
+                            <input type="date" id="date" className="dateinput inputs" onBlur={this.onBlurEvent}/>
                         </div>
                     </div>
                     <div className="location-submit">
@@ -103,11 +165,48 @@ export default class Home extends Component {
                                 <option>Chennai</option>
                             </select>
                         </div>
-                        <button className="btn" type="button">Add/Update</button>
+                        <button className="btn" type="button" onClick={this.onClickAdd}>Add/Update</button>
                     </div>
                 </form>
             </fieldset>
-            <Data/>
+            <div className="table-container">
+                <table className="table sticky table-head">
+                    <thead className="head-container">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>DOB</th>
+                            <th>JobType</th>
+                        </tr>
+                    </thead>
+                    <tbody className="table-body-container">
+                        {allData.map(person => (
+                            <DataTableing key={count += 1} fullData={person} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>)
     }
 }
+
+/* 
+<div className="table-container">
+                <table className="table-head">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>DOB</th>
+                            <th>JobType</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allData.map(item =>(
+                            <DataTableing key={count += 1} fullData={item} />
+                        ))}
+                    </tbody>
+                </table>
+        </div> */

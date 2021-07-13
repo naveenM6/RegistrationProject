@@ -184,4 +184,22 @@
         font-size: 15px;
         border-radius: 6px;
     }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      .table-container{
+        display: flex;
+        justify-content: center;
+        margin: 50px;
+        height: 313px;
+        overflow: auto;
+    }
+    .head-container{
+        background-color: #00000042;
+    }
+    td,th{
+        padding:15px;
+        overflow:auto;
+    }
 }
