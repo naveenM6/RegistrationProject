@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-/* import Data from '../Data' */
+import Data from '../Data'
 
 import './index.css'
 
@@ -107,6 +107,7 @@ export default class Home extends Component {
                     </div>
                 </form>
             </fieldset>
+            <Data/>
         </div>)
     }
 }
