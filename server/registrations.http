@@ -5,13 +5,5 @@ Get http://localhost:5004/
 POST  http://localhost:5004/
 Content-Type: application/json
 
-{
-    "Name": "test6",
-    "Email": "test6@gmail.com",
-    "Mobile": "8679875938",
-    "DOB": "1998-7-1",
-    "JobType": "PartTime"
-}
-
 ###
 DELETE http://localhost:5004/

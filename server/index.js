@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-let db = "";
+let db = ""
 
 const intializingDatabase = async (req, res) =>{
     try{
@@ -39,7 +39,7 @@ app.post("/",async (req, res) => {
     const {Name,Email,Mobile,DOB,JobType} = req.body;
     const selectUserQuery = `SELECT * FROM registration WHERE Name = '${Name}' and Mobile = '${Mobile}'`;
     const dbUser = await db.get(selectUserQuery);
-    console.log(dbUser);
+    console.log(Name,Email,Mobile,DOB,JobType);
     if (dbUser === undefined) {
         const query = `INSERT INTO 
         registration (Name,Email,Mobile,DOB,JobType)
@@ -49,7 +49,7 @@ app.post("/",async (req, res) => {
             '${DOB}',
             '${JobType}')`;
         const response = await db.run(query);
-        response.send("user created successfully");
+        res.send("user created successfully");
     }else{
         res.status(400);
         res.send("User already exists");
@@ -57,7 +57,7 @@ app.post("/",async (req, res) => {
 })
 
 app.delete('/',async (req, res) => {
-    const query = `delete from registration where name = 'undefined'`;
+    const query = `delete from registration where name = ''`;
     await db.run(query);
     res.send('user deleted');
 })

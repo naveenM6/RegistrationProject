@@ -70,6 +70,7 @@ export default class Home extends Component {
 
     onBlurEvent = event =>{
         const enteredValue = event.target.value;
+        console.log(enteredValue)
         switch(event.target.id){
             case 'name':
                 this.setState({name:enteredValue});
@@ -92,16 +93,27 @@ export default class Home extends Component {
     // OnClick add button
 
     onClickAdd = async () => {
-        const {name,email,mobile,dob,selectedJobType} = this.state
-        const userDetails = {name,email,mobile,dob,selectedJobType}
-        const converted = JSON.stringify(userDetails);
-        const apiUrl = "http://localhost:5004";
-        const options = {
-            method: 'POST',
-            body: converted,
+        const {name,email,mobile,dob,selectedJobType} = this.state;
+        if(name !== '' && email !== '' && mobile !== '' && selectedJobType !== '' && dob !== '') {
+            const apiUrl = "http://localhost:5004";
+            const options = {
+                headers:{
+                    "content-type": "application/json"
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    Name: name,
+                    Email: email,
+                    Mobile: mobile,
+                    DOB : dob,
+                    JobType: selectedJobType,
+                })
+            }
+            const response = await fetch(apiUrl, options);
+            if(response.ok === true){
+                this.setState({reRenderData:''});
+            }
         }
-        const response = await fetch(apiUrl, options);
-        console.log(response);
     }
 
 
@@ -173,7 +185,7 @@ export default class Home extends Component {
                                 <option>Chennai</option>
                             </select>
                         </div>
-                        <button className="btn" type="button" onClick={this.onClickAdd}>Add/Update</button>
+                        <button className="btn" type="reset" onClick={this.onClickAdd}>Add/Update</button>
                     </div>
                 </form>
             </fieldset>
