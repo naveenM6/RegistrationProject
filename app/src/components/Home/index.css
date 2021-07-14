@@ -192,17 +192,20 @@
         display: flex;
         justify-content: center;
         margin-top: 50px;
-        height: 313px;
+        height: 320px;
         overflow: auto;
+        width: 100%;
     }
     .table-container::-webkit-scrollbar {
         display: none;
       }
-    .head-container{
-        background-color: #00000042;
-    }
     td,th{
         padding:15px;
-        overflow:auto;
+    }
+    thead th{
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color:#d0c4c4;
     }
 }
