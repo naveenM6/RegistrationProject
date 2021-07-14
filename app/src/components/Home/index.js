@@ -12,7 +12,11 @@ export default class Home extends Component {
             name:'',
             mobile:'',
             dob:'',
-            email:'',}
+            email:'',
+            reRenderData:''}
+
+    // image related
+
 
     onChangePhoto = event =>{
         const selectedImage = event.target.files[0];
@@ -21,6 +25,9 @@ export default class Home extends Component {
             this.setState({image:src,isActive:true});
         }
     }
+
+
+    // prevent default on form submit
 
     preventDefault = event =>{
         event.preventDefault();
@@ -33,6 +40,8 @@ export default class Home extends Component {
     componentDidMount(){
         this.getData()
     }
+
+    // Intializing and getting data
 
     getData = async () =>{
         const apiUrl = "http://localhost:5004/"
@@ -56,6 +65,9 @@ export default class Home extends Component {
         }
     }
 
+
+    //getting Data from inputs
+
     onBlurEvent = event =>{
         const enteredValue = event.target.value;
         switch(event.target.id){
@@ -76,6 +88,9 @@ export default class Home extends Component {
         }
     }
 
+
+    // OnClick add button
+
     onClickAdd = async () => {
         const {name,email,mobile,dob,selectedJobType} = this.state
         const userDetails = {name,email,mobile,dob,selectedJobType}
@@ -89,6 +104,8 @@ export default class Home extends Component {
         console.log(response);
     }
 
+
+    // rendering
 
     render(){
         const {image,selectedJobType,allData} = this.state;

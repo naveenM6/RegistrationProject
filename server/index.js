@@ -53,7 +53,6 @@ app.post("/",async (req, res) => {
     }else{
         res.status(400);
         res.send("User already exists");
-
     }
 })
 
@@ -62,3 +61,5 @@ app.delete('/',async (req, res) => {
     await db.run(query);
     res.send('user deleted');
 })
+
+module.exports = app;
