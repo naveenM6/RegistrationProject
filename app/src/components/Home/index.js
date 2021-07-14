@@ -190,8 +190,8 @@ export default class Home extends Component {
                 </form>
             </fieldset>
             <div className="table-container">
-                <table className="table sticky table-head">
-                    <thead className="head-container">
+                <table className="table table-head">
+                    <thead className="head-container head-fixed-top">
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
