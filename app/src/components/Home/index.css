@@ -208,4 +208,7 @@
         z-index: 100;
         background-color:#d0c4c4;
     }
+    thead{
+        top:-10px;
+    }
 }
