@@ -59,20 +59,16 @@ export default class Home extends Component {
     onBlurEvent = event =>{
         const enteredValue = event.target.value;
         switch(event.target.id){
-            case event.target.id === 'name':
-                console.log(enteredValue);
+            case 'name':
                 this.setState({name:enteredValue});
                 break;
-            case event.target.id === 'email':
-                console.log(enteredValue);
+            case 'email':
                 this.setState({email:enteredValue});
                 break;
-            case event.target.id === 'date':
-                console.log(enteredValue);
+            case 'date':
                 this.setState({dob:enteredValue});
                 break;
-            case event.target.id === 'number':
-                console.log(enteredValue);
+            case 'number':
                 this.setState({mobile:enteredValue});
                 break;
             default:
@@ -83,19 +79,14 @@ export default class Home extends Component {
     onClickAdd = async () => {
         const {name,email,mobile,dob,selectedJobType} = this.state
         const userDetails = {name,email,mobile,dob,selectedJobType}
-        console.log(userDetails)
+        const converted = JSON.stringify(userDetails);
         const apiUrl = "http://localhost:5004";
         const options = {
-            headers:{
-                'content-type': 'application/json'
-            },
             method: 'POST',
-            body: JSON.stringify(userDetails)
+            body: converted,
         }
         const response = await fetch(apiUrl, options);
-        if (response.ok === true) {
-            console.log('Data Inserted');
-        }
+        console.log(response);
     }
 
 

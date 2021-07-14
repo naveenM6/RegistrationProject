@@ -39,6 +39,7 @@ app.post("/",async (req, res) => {
     const {Name,Email,Mobile,DOB,JobType} = req.body;
     const selectUserQuery = `SELECT * FROM registration WHERE Name = '${Name}' and Mobile = '${Mobile}'`;
     const dbUser = await db.get(selectUserQuery);
+    console.log(dbUser);
     if (dbUser === undefined) {
         const query = `INSERT INTO 
         registration (Name,Email,Mobile,DOB,JobType)
@@ -54,4 +55,10 @@ app.post("/",async (req, res) => {
         res.send("User already exists");
 
     }
+})
+
+app.delete('/',async (req, res) => {
+    const query = `delete from registration where name = 'undefined'`;
+    await db.run(query);
+    res.send('user deleted');
 })
